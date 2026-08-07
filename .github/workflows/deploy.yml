@@ -14,15 +14,18 @@ jobs:
     steps:
       - name: Checkout del repositorio
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.PAT_TOKEN }}
 
       - name: Configurar Git
         run: |
           git config --global user.name "github-actions"
           git config --global user.email "actions@github.com"
 
-      - name: Deploy a GitHub Pages
+      - name: Deploy a GitHub Pages (rama main)
         uses: peaceiris/actions-gh-pages@v4
         with:
           personal_token: ${{ secrets.PAT_TOKEN }}
           publish_dir: ./
-          publish_branch: gh-pages
+          publish_branch: main
+          keep_files: true
